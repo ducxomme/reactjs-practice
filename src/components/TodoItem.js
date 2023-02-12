@@ -1,13 +1,27 @@
-import React, {Component} from "react";
+import React, {useState} from "react";
 
-class TodoItem extends Component {
-  render () {
-    return (
-      <p className="TodoItem">
-        Task 1
-      </p>
-    );
+function TodoItem(props) {
+  const [isCompleted, setIsCompleted] = useState(false);
+
+  const updateTask = () => {
+    setIsCompleted(!isCompleted);
   }
+
+  const textStyle = {
+    textDecorationLine: isCompleted ? "line-through" : "none"
+  };
+
+  return (
+    <div>
+      <input 
+          type="checkbox" 
+          className="TodoItem" 
+          checked={isCompleted} 
+          onChange={updateTask}
+        />
+        <label htmlFor="TodoItem" style={ textStyle }>{props.task}</label>
+    </div>
+  );
 }
 
 export default TodoItem;
