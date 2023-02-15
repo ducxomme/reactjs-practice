@@ -4,18 +4,21 @@ import TodoItem from '../components/TodoItem';
 function TodoList() {
   const [todos, setTodos] = useState([]);
   const [taskInput, setTaskInput] = useState("");
-  // const [isChecked, setIsChecked] = useState(false);
 
   const addTodo = (task) => {
     setTodos([...todos, task])
     setTaskInput("");
   }
 
+  const deleteTask = (index) => {
+    setTodos(todos.filter((_, i) => i !== index));
+  }
+
   const displayTodos = () => {
     return todos.map((task, index) => {
       return (
         <li key={index} style={{ listStyleType: "none" }}>
-          <TodoItem task={task} />
+          <TodoItem index={index} task={task} onDelete={deleteTask}/>
         </li>
       );
     })
